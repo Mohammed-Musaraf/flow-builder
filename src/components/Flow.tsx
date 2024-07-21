@@ -1,5 +1,7 @@
+import { Box, useDisclosure } from "@chakra-ui/react";
 import {
   addEdge,
+  getConnectedEdges,
   NodeTypes,
   ReactFlow,
   ReactFlowProps,
@@ -18,17 +20,17 @@ import {
   useRef,
   useState,
 } from "react";
-
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { Header } from "./Header";
 import "./index.css";
 import MessageForm from "./MessageForm";
 import { NodeMenu } from "./NodeMenu";
 import messageNode from "./TextMessageNode";
-import { Header } from "./Header";
+
+const { v4: uuidv4 } = require("uuid");
 
 const initialNodes = [
   {
-    id: "1",
+    id: uuidv4(),
     type: "messageNode",
     data: { nodeName: "messageNode", value: "Text message goes here" },
     position: { x: 250, y: 5 },
@@ -36,7 +38,7 @@ const initialNodes = [
 ];
 
 let id = 0;
-const getId = () => `dndnode_${id++}`;
+const getId = () => uuidv4();
 
 const nodeTypes = {
   messageNode,
@@ -138,10 +140,12 @@ const DnDFlow = () => {
     <>
       <Header
         onSubmit={() => {
-          window?.localStorage.setItem(
-            "localNode",
-            JSON.stringify({ nodes, edges })
-          );
+          const connectedEdges = getConnectedEdges(nodes, edges);
+          console.log(connectedEdges, nodes, edges);
+          // window?.localStorage.setItem(
+          //   "localNode",
+          //   JSON.stringify({ nodes, edges })
+          // );
         }}
       />
       <Box sx={flowStyle} ref={reactFlowWrapper}>
