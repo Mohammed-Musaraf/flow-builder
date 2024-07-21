@@ -1,20 +1,25 @@
-import React, { useEffect } from "react";
+import { Box } from "@chakra-ui/react";
+import { useEffect } from "react";
 import Flow from "./components/Flow";
+import { Header } from "./components/Header";
 
-const App = () => {
+const App: React.FC = () => {
   useEffect(() => {
     const removePanels = () => {
       const panels = document.querySelectorAll(".react-flow__attribution");
-      console.log(panels);
       panels.forEach((panel) => panel.remove());
     };
-
     removePanels();
   }, []);
+
   return (
-    <div style={{ width: "full", height: "97vh", overflow: "clip" }}>
+    <Box
+      style={{ width: "full", height: "97vh", overflow: "clip" }}
+      position="relative"
+    >
+      <Header />
       <Flow />
-    </div>
+    </Box>
   );
 };
 

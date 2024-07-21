@@ -10,7 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
     "@xyflow/react": "^12.0.3",
+    "framer-motion": "^11.3.8",
+    "lucide-react": "^0.411.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
