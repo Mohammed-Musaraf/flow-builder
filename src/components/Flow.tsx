@@ -1,5 +1,6 @@
 import {
   addEdge,
+  NodeTypes,
   ReactFlow,
   ReactFlowProps,
   ReactFlowProvider,
@@ -37,7 +38,7 @@ const getId = () => `dndnode_${id++}`;
 
 const nodeTypes = {
   messageNode,
-};
+} as unknown as NodeTypes;
 
 type OnConnect = NonNullable<ReactFlowProps["onConnect"]>;
 export interface NodeType {

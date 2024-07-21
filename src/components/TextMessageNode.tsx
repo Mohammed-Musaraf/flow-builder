@@ -2,6 +2,7 @@ import { HStack, Icon, Image, Text, VStack } from "@chakra-ui/react";
 import { Handle, Position } from "@xyflow/react";
 import { MessageCircleMore } from "lucide-react";
 import { CSSProperties, memo } from "react";
+import { NodeType } from "./Flow";
 import WhatsappIcon from "/whatsapp.png";
 
 const handleStyle: CSSProperties = {
@@ -17,15 +18,14 @@ const targetHandleStyle: CSSProperties = {
   transform: "translateX(-25%)",
 };
 
-export default memo(({ data, isConnectable }) => {
-  const selected = true;
+const TextMessageNode: React.FC<NodeType> = (node) => {
   return (
     <VStack
       align="flex-start"
       rounded="md"
-      borderStyle={selected ? "solid" : "dashed"}
+      borderStyle={"solid"}
       borderWidth={2}
-      borderColor={selected ? "brand.500" : "brand.100"}
+      borderColor={"brand.500"}
       bg="white"
       spacing={0}
       width="250px"
@@ -84,9 +84,11 @@ export default memo(({ data, isConnectable }) => {
           p="1"
           textColor="gray.600"
         >
-          {data.value}
+          {node.data.value}
         </Text>
       </VStack>
     </VStack>
   );
-});
+};
+
+export default memo(TextMessageNode);
