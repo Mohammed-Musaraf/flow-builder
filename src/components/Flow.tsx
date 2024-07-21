@@ -26,7 +26,7 @@ import MessageForm from "./MessageForm";
 import { NodeMenu } from "./NodeMenu";
 import messageNode from "./TextMessageNode";
 
-const { v4: uuidv4 } = require("uuid");
+import { v4 as uuidv4 } from "uuid";
 
 const initialNodes = [
   {
@@ -140,12 +140,10 @@ const DnDFlow = () => {
     <>
       <Header
         onSubmit={() => {
-          const connectedEdges = getConnectedEdges(nodes, edges);
-          console.log(connectedEdges, nodes, edges);
-          // window?.localStorage.setItem(
-          //   "localNode",
-          //   JSON.stringify({ nodes, edges })
-          // );
+          window?.localStorage.setItem(
+            "localNode",
+            JSON.stringify({ nodes, edges })
+          );
         }}
       />
       <Box sx={flowStyle} ref={reactFlowWrapper}>
