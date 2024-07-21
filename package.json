@@ -17,12 +17,14 @@
     "framer-motion": "^11.3.8",
     "lucide-react": "^0.411.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@types/uuid": "^9.0.7",
     "@typescript-eslint/parser": "^7.15.0",
     "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^8.57.0",

@@ -36,15 +36,14 @@ const TextMessageNode: React.FC<NodeType> = (node) => {
         type="target"
         style={targetHandleStyle}
         position={Position.Left}
-        id={`a`}
+        id={`${node.id}-target`}
       />
       <Handle
         type="source"
         style={sourceHandleStyle}
         position={Position.Right}
-        id={`b`}
+        id={`${node.id}-source`}
       />
-
       <HStack
         align="center"
         justify="flex-start"
