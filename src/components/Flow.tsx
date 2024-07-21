@@ -14,6 +14,7 @@ import {
   CSSProperties,
   DragEventHandler,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -23,6 +24,7 @@ import "./index.css";
 import MessageForm from "./MessageForm";
 import { NodeMenu } from "./NodeMenu";
 import messageNode from "./TextMessageNode";
+import { Header } from "./Header";
 
 const initialNodes = [
   {
@@ -63,6 +65,16 @@ const DnDFlow = () => {
     useNodesState<NodeType>(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const { screenToFlowPosition } = useReactFlow();
+
+  useEffect(() => {
+    const localNode = JSON.parse(
+      window?.localStorage.getItem("localNode") ?? "{}"
+    );
+    const { edges = [], nodes = initialNodes } = localNode;
+    setNodes(nodes);
+    setEdges(edges);
+  }, []);
+
   const onConnect = useCallback<OnConnect>(
     (params) => setEdges((eds) => addEdge(params, eds)),
     []
@@ -123,25 +135,35 @@ const DnDFlow = () => {
   };
 
   return (
-    <Box sx={flowStyle} ref={reactFlowWrapper}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        onDrop={onDrop}
-        onDragOver={onDragOver}
-        nodeTypes={nodeTypes}
+    <>
+      <Header
+        onSubmit={() => {
+          window?.localStorage.setItem(
+            "localNode",
+            JSON.stringify({ nodes, edges })
+          );
+        }}
       />
-      <NodeMenu />
-      <MessageForm
-        {...disclosureProps}
-        node={selectedNode!}
-        onSubmit={onFormSubmit}
-        onCancel={onCancelFormSubmit}
-      />
-    </Box>
+      <Box sx={flowStyle} ref={reactFlowWrapper}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          onDrop={onDrop}
+          onDragOver={onDragOver}
+          nodeTypes={nodeTypes}
+        />
+        <NodeMenu />
+        <MessageForm
+          {...disclosureProps}
+          node={selectedNode!}
+          onSubmit={onFormSubmit}
+          onCancel={onCancelFormSubmit}
+        />
+      </Box>
+    </>
   );
 };
 

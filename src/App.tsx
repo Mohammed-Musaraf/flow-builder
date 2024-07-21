@@ -17,7 +17,6 @@ const App: React.FC = () => {
       style={{ width: "full", height: "97vh", overflow: "clip" }}
       position="relative"
     >
-      <Header />
       <Flow />
     </Box>
   );
